@@ -34,10 +34,9 @@ public class Employee {
     private BigDecimal comm;
     @Column(name = "MANAGER_ID")
     private Integer mgrid;
-    //@Column(name = "DEPARTMENT_ID")
-    //@JoinColumn(name="departments_id")
+
     @Column(name = "DEPARTMENT_ID")
-    private long detpid;
+    private Long detpid;
 
     @ManyToOne  // 테이블 연관 관계 = 다 : 1
     @JoinColumn(name = "department_id") // department테이블의 id 컬럼과 조인

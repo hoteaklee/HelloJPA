@@ -2,10 +2,8 @@ package jpa;
 
 import model.Employee;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HelloJPA03 {
@@ -71,6 +69,58 @@ public class HelloJPA03 {
             List<Object[]> joins = em.createQuery(jpql).getResultList();
             for (Object[] join: joins)
                 System.out.println(join[0] + " / " + join[1]+ " / " + join[2]+ " / " + join[3]);
+
+            // 부서번호가 60번인 사원들의 이름, 직책, 부서명 조회 : join
+            jpql="select e.fname,e.jobid,d.dname from Employee e " +
+                    " inner join e.department d where e.detpid = 60 ";
+            List<Object[]> join60s = em.createQuery(jpql).getResultList();
+            for (Object[] join60: join60s)
+                System.out.println(join60[0] + " / " + join60[1]+ " / " + join60[2]);
+
+            // 부서명이 IT인 사원의 사번과 입사일 조회 : 서브쿼리
+            jpql="select empid, hdate from Employee e where detpid = " +
+                    "(select deptid from Department d where dname = 'IT') ";
+            List<Object[]> ITs = em.createQuery(jpql).getResultList();
+            for (Object[] it: ITs)
+                System.out.println(it[0] + " / " + it[1]);
+
+            // 제공된 이름, 직책, 연봉으로 사원 조회 : 동적 쿼리
+            String fname=null;
+            String jobid="IT_PROG";
+            Integer sal =null;  // null 체크를 위해서 클래스형으로 선언
+
+            jpql = "select e from Employee e ";
+            List<String> cndtns = new ArrayList<>();    // 조건절 저장 변수
+
+            if (fname != null){
+                cndtns.add(" fname like concat('%',:fanme,'%') ");
+            }
+            if (jobid != null){
+                cndtns.add(" jobid = :jobid  ");
+            }
+            if (sal != null){
+                cndtns.add(" sal >= :sal ");
+            }
+            if (!cndtns.isEmpty()){     // 조건식이 하나라도 존재한다면
+                jpql += " where " + String.join(" and ", cndtns);
+            }
+
+            // 매개변수에 값 넣기
+            TypedQuery<Employee> query1 = em.createQuery(jpql, Employee.class);
+            if (fname != null){
+                query1.setParameter("fname", fname);
+            }
+            if (jobid != null){
+                query1.setParameter("jobid", jobid);
+            }
+            if (sal != null){
+                query1.setParameter("sal", sal);
+            }
+
+            List<Employee> Employee = query1.getResultList();
+            for (Employee e: Employee)
+                System.out.println(e);
+
 
         } catch (Exception ex){
             ex.printStackTrace();
