@@ -3,6 +3,9 @@ package model;
 //hdate, jobid, sal, comm, mgrid, deptid
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,7 +13,8 @@ import java.sql.Date;
 
 @Entity
 @Table(name= "employees")
-@Data
+@Setter @Getter
+@NoArgsConstructor
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,12 +40,30 @@ public class Employee {
     private Integer mgrid;
 
     @Column(name = "DEPARTMENT_ID")
-    private Long detpid;
+    private Integer detpid;
 
-    @ManyToOne  // 테이블 연관 관계 = 다 : 1
-    @JoinColumn(name = "department_id") // department테이블의 id 컬럼과 조인
-    private Department department;
+//    @ManyToOne  // 테이블 연관 관계 = 다 : 1
+//    @JoinColumn(name = "department_id") // department테이블의 id 컬럼과 조인
+//    private Department department;
 
 
 
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Employee{");
+        sb.append("empid=").append(empid);
+        sb.append(", fname='").append(fname).append('\'');
+        sb.append(", lname='").append(lname).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", hdate=").append(hdate);
+        sb.append(", jobid='").append(jobid).append('\'');
+        sb.append(", sal=").append(sal);
+        sb.append(", comm=").append(comm);
+        sb.append(", mgrid=").append(mgrid);
+        sb.append(", detpid=").append(detpid);
+        sb.append('}');
+        return sb.toString();
+    }
 }
