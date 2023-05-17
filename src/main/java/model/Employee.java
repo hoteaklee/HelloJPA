@@ -40,7 +40,7 @@ public class Employee {
     private Integer mgrid;
 
     @Column(name = "DEPARTMENT_ID")
-    private Integer detpid;
+    private Long detpid;
 
     @ManyToOne  // 테이블 연관 관계 = 다 : 1
     @JoinColumn(name = "department_id") // department테이블의 id 컬럼과 조인
