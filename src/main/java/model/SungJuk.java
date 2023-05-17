@@ -12,13 +12,13 @@ import java.util.Date;
 public class SungJuk {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int sjno;
+    private Long sjno;
 
     @Column(length = 10, nullable = false)
     private String name;
-    private int kor;
-    private int eng;
-    private int mat;
+    private Integer kor;
+    private Integer eng;
+    private Integer mat;
     @Column(nullable = true)
     private int tot;
     @Column(nullable = true, precision = 5, scale = 1)
