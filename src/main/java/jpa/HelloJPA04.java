@@ -113,27 +113,27 @@ public class HelloJPA04 {
                                             + "/" + item[3]+ "/" + item[4]);*/
 
             // 서브 쿼리 1 : 평균연봉보다 작게 받는 사원들 조회
-//            cb = em.getCriteriaBuilder();
-//            query = cb.createQuery(Employee.class);
+            cb = em.getCriteriaBuilder();
+            query = cb.createQuery(Employee.class);
+            Root<Employee> e = query.from(Employee.class);
 
             //하위 쿼리
-            /*Root<Employee> s = query.from(Employee.class);
             Subquery<Double> qryAsal = query.subquery(Double.class);
-            qryAsal.select( cb.avg(s.get("sal")) );
+            Root<Employee> se = qryAsal.from(Employee.class);
+            qryAsal.select( cb.avg(se.get("sal")) );
 
             // 주 쿼리
-            Root<Employee> m = query.from(Employee.class);
-            query.select(e).where(cb.lt(m.get("sal"), qryAsal));
+            query.select(e).where(cb.lt(e.get("sal"), qryAsal));
             List<Employee> emps = em.createQuery(query).getResultList();
 
             for (Employee emp : emps)
-                System.out.println(emp);*/
+                System.out.println(emp);
 
 
             // 서브 쿼리 2 : 부서번호가 60번인 사원들의 이름, 직책, 부서명 조회
 
             // join : 부서번호가 60번인 사원들의 이름, 직책, 부서명 조회
-            /*CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
+           /* CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
             Root<Employee> e = cq.from(Employee.class);
 
             // 2개의 객체를 조인함
@@ -149,7 +149,7 @@ public class HelloJPA04 {
                 System.out.println(item[0]+ "/" + item[1]+ "/" + item[2]);*/
 
             // 동적 쿼리
-            String fname = null;
+            /*String fname = null;
             String jobid = "IT_PROG";
             Integer sal = 6000;
 
@@ -171,7 +171,7 @@ public class HelloJPA04 {
             List<Employee> emps = em.createQuery(query).getResultList();
 
             for (Employee emp : emps)
-                System.out.println(emp);
+                System.out.println(emp);*/
 
 
 
