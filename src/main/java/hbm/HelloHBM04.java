@@ -57,7 +57,7 @@ public class HelloHBM04 {
 //            System.out.println(emps);
 
             // 정렬 : orderby , 부서번호 기준
-//            Query query = sess.createQuery("from Employee order by detpid desc ");
+//            Query query = sess.createQuery("from Employee order by deptid desc ");
 //            List<Employee> emps = query.list();
 //
 //            for (Employee e : emps)
@@ -98,8 +98,8 @@ public class HelloHBM04 {
 
             // join : 부서번호가 60번인 사원들의 이름, 직책, 부서명 조회
             String hql = "select e.fname, e.jobid, d.dname from Employee e" +
-                    " inner join  Department d on e.detpid = d.deptid " +
-                    " where e.detpid = 60 " ;
+                    " inner join  Department d on e.deptid = d.deptid " +
+                    " where e.deptid = 60 " ;
             Query query = sess.createQuery(hql);
             List<Object[]> items = query.getResultList();
 

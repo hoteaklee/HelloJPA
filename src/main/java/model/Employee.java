@@ -40,7 +40,7 @@ public class Employee {
     private Integer mgrid;
 
     @Column(name = "DEPARTMENT_ID")
-    private Long detpid;
+    private Long deptid;
 
     @ManyToOne  // 테이블 연관 관계 = 다 : 1
     @JoinColumn(name = "department_id" , insertable = false,updatable = false) // department테이블의 id 컬럼과 조인
@@ -62,7 +62,7 @@ public class Employee {
         sb.append(", sal=").append(sal);
         sb.append(", comm=").append(comm);
         sb.append(", mgrid=").append(mgrid);
-        sb.append(", detpid=").append(detpid);
+        sb.append(", deptid=").append(deptid);
         sb.append('}');
         return sb.toString();
     }

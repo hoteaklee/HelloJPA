@@ -44,14 +44,14 @@ public class HelloQueryDSL02 {
 //                System.out.println(e);
 
             // 사원 데이터 조회 - select(컬럼명,...) : 이름, 부서번호, 입사일
-//            List<Tuple> items = query.select(qemp.fname, qemp.detpid, qemp.hdate)
+//            List<Tuple> items = query.select(qemp.fname, qemp.deptid, qemp.hdate)
 //                                    .from(qemp).fetch();
 //            for (Tuple item : items)
 //                System.out.println(item);
 
             // 정렬 : orderby , 부서번호 기준
 //            query = new JPAQueryFactory(em);
-//            List<Employee> emps = query.selectFrom(qemp).orderBy(qemp.detpid.desc()).fetch();
+//            List<Employee> emps = query.selectFrom(qemp).orderBy(qemp.deptid.desc()).fetch();
 //
 //            System.out.println(emps);
 
@@ -131,7 +131,7 @@ public class HelloQueryDSL02 {
 //
 //                // 주쿼리
 //                List<Tuple> items =  query.select(qemp.fname, qemp.jobid, qemp.sal).from(qemp)
-//                        .where(qemp.detpid.eq(subqry)).fetch();
+//                        .where(qemp.deptid.eq(subqry)).fetch();
 //
 //                System.out.println(items);
 
@@ -140,7 +140,7 @@ public class HelloQueryDSL02 {
 //            query = new JPAQueryFactory(em);
 //            List<Tuple> items =
 //            query.select(qemp.fname, qemp.jobid, qdept.dname).from(qemp)
-//                    .join(qemp.department, qdept).where(qemp.detpid.eq(60L)).fetch();   // 60L = new Long(60)
+//                    .join(qemp.department, qdept).where(qemp.deptid.eq(60L)).fetch();   // 60L = new Long(60)
 //
 //            System.out.println(items);
 

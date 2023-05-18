@@ -22,7 +22,7 @@ public class HelloJPA03 {
 
             // 사원 데이터 조회 - Query : 이름, 부서번호, 입사일
             // createQuery(질의문)
-            jpql="select fname, detpid, hdate from Employee e";
+            jpql="select fname, deptid, hdate from Employee e";
             List<Object[]> items = em.createQuery(jpql).getResultList();
 //            for (Object[] item : items)
 //                System.out.println(item[0]+ "/" + item[1]+ "/"+ item[2]);
@@ -65,20 +65,20 @@ public class HelloJPA03 {
                 System.out.println(jobavg[0] + " / " + jobavg[1]+ " / " + jobavg[2]);
 
             // 사원이름, 직책, 부서명 조회 : join
-            jpql="select e.fname,e.jobid, e.detpid,d.dname from Employee e  inner join e.department d";
+            jpql="select e.fname,e.jobid, e.deptid,d.dname from Employee e  inner join e.department d";
             List<Object[]> joins = em.createQuery(jpql).getResultList();
             for (Object[] join: joins)
                 System.out.println(join[0] + " / " + join[1]+ " / " + join[2]+ " / " + join[3]);
 
             // 부서번호가 60번인 사원들의 이름, 직책, 부서명 조회 : join
             jpql="select e.fname,e.jobid,d.dname from Employee e " +
-                    " inner join e.department d where e.detpid = 60 ";
+                    " inner join e.department d where e.deptid = 60 ";
             List<Object[]> join60s = em.createQuery(jpql).getResultList();
             for (Object[] join60: join60s)
                 System.out.println(join60[0] + " / " + join60[1]+ " / " + join60[2]);
 
             // 부서명이 IT인 사원의 사번과 입사일 조회 : 서브쿼리
-            jpql="select empid, hdate from Employee e where detpid = " +
+            jpql="select empid, hdate from Employee e where deptid = " +
                     "(select deptid from Department d where dname = 'IT') ";
             List<Object[]> ITs = em.createQuery(jpql).getResultList();
             for (Object[] it: ITs)
